@@ -1,31 +1,39 @@
 Summary:	GNU smalltalk (No X support)
 Summary(pl):	GNU smalltalk (Bez wsparcia dla X)
 Name:		smalltalk
-Version:	1.7
-Release:	3
+Version:	1.95.1
+Release:	1
 License:	GPL
 Group:		Development/Languages
+Group(de):	Entwicklung/Sprachen
 Group(pl):	Programowanie/Jêzyki
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
-Source1:	smalltalk.desktop
-Source2:	smalltalk.png
-Patch0:		smalltalk-DESTDIR.patch
-Patch1:		smalltalk-info.patch
+Source1:	%{name}.desktop
+Source2:	%{name}.png
+Patch0:		%{name}-info.patch
 Icon:		smalltalk.xpm
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-The GNU smalltalk interpreter.
+GNU Smalltalk is a Free (or Open Source) implementation that closely
+follows the Smalltalk-80 language as described in the book
+Smalltalk-80: the Language and its Implementation by Adele Goldberg
+and David Robson. GNUSmalltalk runs on most versions of Unix or Unix
+like systems (GNU/Linux, FreeBSD, etc...). There is even a version for
+commercial operating systems like MS-NT.
 
 %description -l pl
-GNU interpreter smalltalka
+GNU interpreter smalltalka.
 
 %package devel
 Summary:	GNU SmallTalk header files
 Summary(pl):	Pliki nag³ówkowe dla GNU SmallTalka
 Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
 Group(pl):	Biblioteki
 Requires:	%{name} = %{version}
 
@@ -39,6 +47,9 @@ Pliki nag³ówkowe dla GNU SmallTalka.
 Summary:	Static libraries for GNU Smalltalk
 Summary(pl):	Biblioteki statyczne dla GNU Smalltalka
 Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
 Group(pl):	Biblioteki
 Requires:	%{name}-devel = %{version}
 
@@ -51,30 +62,26 @@ Biblioteki statyczne dla GNU SmallTalka.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
-autoconf
 %configure
 %{__make}
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_includedir},%{_mandir}/man1,%{_infodir}} \
-	$RPM_BUILD_ROOT{%{_applnkdir}/Development,%{_prefix}/X11R6/share/pixmaps}
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Development,%{_pixmapsdir}}
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
 ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/gnu-smalltalk/gst
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Development
-install %{SOURCE2} $RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
+install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-gzip -9nf README docs/{AUTHORS,ChangeLog*,stamp-classes,todo,categories} \
-	docs/NEWS 
+gzip -9nf AUTHORS NEWS README THANKS
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
@@ -84,10 +91,6 @@ gzip -9nf README docs/{AUTHORS,ChangeLog*,stamp-classes,todo,categories} \
 
 %files
 %defattr(644,root,root,755)
-%doc README.gz docs/AUTHORS.gz docs/ChangeLog*.gz
-%doc docs/DOM.html docs/stamp-classes.gz
-%doc docs/todo.gz docs/NEWS.gz docs/categories.gz
-%doc emacs
 %attr (755,root,root) %{_bindir}/gst
 %{_datadir}/gnu-smalltalk
 %{_infodir}/*
@@ -97,6 +100,9 @@ gzip -9nf README docs/{AUTHORS,ChangeLog*,stamp-classes,todo,categories} \
 
 %files devel
 %defattr(644,root,root,755)
+%doc *.gz
+%attr (755,root,root) %{_bindir}/gst-config
+%attr (755,root,root) %{_bindir}/gst-package
 %{_includedir}/*
 
 %files static
