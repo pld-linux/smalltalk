@@ -33,6 +33,11 @@ BuildRequires:	pkgconfig
 BuildRequires:	readline-devel >= 4.2
 BuildRequires:	tk-devel >= 8.4
 #BuildRequires:  xemacs
+# 2.1.x versions won't work correctly on amd64 and alpha (on amd64 crashes
+# even on build time) because of calling convention (no registers support)
+# it should be fixed in devel (2.1e) version (but alloc,amd64 patches seem
+# still needed there)
+ExcludeArch:	alpha amd64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
