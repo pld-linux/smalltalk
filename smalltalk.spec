@@ -13,18 +13,18 @@ Source2:	%{name}.png
 Patch1:		%{name}-PACKAGE.patch
 Patch2:		%{name}-enums.patch
 Icon:		smalltalk.xpm
+BuildRequires:	atk-devel >= 1.0.0
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:  gawk
-BuildRequires:	pkgconfig
-BuildRequires:  glib-devel >= 2.0.0
-BuildRequires:  gtk+-devel >= 2.0.0
-BuildRequires:  pango-devel >= 1.0.0
-BuildRequires:  atk-devel >= 1.0.0
-BuildRequires:  gdbm-devel
-#BuildRequires:  xemacs
+BuildRequires:	gawk
+BuildRequires:	gdbm-devel
+BuildRequires:	glib2-devel >= 2.0.0
+BuildRequires:	gtk+2-devel >= 2.0.0
 BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	pango-devel >= 1.0.0
+BuildRequires:	pkgconfig
 BuildRequires:	readline-devel >= 4.2
+#BuildRequires:  xemacs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -77,14 +77,16 @@ Biblioteki statyczne dla GNU SmallTalka.
 %{__aclocal} -I snprintfv -I config
 %{__autoconf}
 %{__automake}
-%configure AWK=gawk
+%configure \
+	AWK=gawk
 %{__make} 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Development,%{_pixmapsdir}}
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/gnu-smalltalk/gst
 
@@ -104,8 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README THANKS
 %attr (755,root,root) %{_bindir}/gst
-%{_datadir}/gnu-smalltalk
+%dir %{_libdir}/gnu-smalltalk
 %attr (755,root,root) %{_libdir}/gnu-smalltalk/*.so
+%{_datadir}/gnu-smalltalk
 %{_infodir}/gst*
 %{_mandir}/man1/*
 %{_applnkdir}/Development/*
