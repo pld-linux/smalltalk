@@ -2,7 +2,7 @@ Summary:	GNU smalltalk (No X support)
 Summary(pl):	GNU smalltalk (Bez wsparcia dla X)
 Name:		smalltalk
 Version:	1.7
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Languages
 Group(pl):	Programowanie/Jêzyki
@@ -13,11 +13,11 @@ Patch0:		smalltalk-DESTDIR.patch
 Patch1:		smalltalk-info.patch
 Icon:		smalltalk.xpm
 PreReq:		/usr/sbin/fix-info-dir
-BuildRequires:	readline-devel
+BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	/tmp/%{name}-%{version}-root
 
-%define		_applnkdir %{_prefix}/X11R6/share/applnk
+%define		_applnkdir 	%{_prefix}/X11R6/share/applnk
 
 %description
 The GNU smalltalk interpreter.
