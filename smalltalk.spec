@@ -2,7 +2,7 @@ Summary:	GNU smalltalk (No X support)
 Summary(pl):	GNU smalltalk (Bez wsparcia dla X)
 Name:		smalltalk
 Version:	1.95.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Languages
 Group(de):	Entwicklung/Sprachen
@@ -26,7 +26,12 @@ like systems (GNU/Linux, FreeBSD, etc...). There is even a version for
 commercial operating systems like MS-NT.
 
 %description -l pl
-GNU interpreter smalltalka.
+GNU Smalltalk jest Woln± (lub Open Source) implementacj± tak blisk±
+jêzykowi Smalltalk-80 jak to jest opisane w ksi±¿ce
+Smalltalk-80: the Language and its Implementation napisanej przez
+Adele Goldberg oraz David Robson. GNUSmalltalk dzia³a na wiêkszo¶ci
+wersji Unix'ów lub systemów Unixo-podobnych (GNU/Linux, FreeBSD, etc...).
+Jest nawet wersja dla systemów komercyjnych, takich jak M$-NT.
 
 %package devel
 Summary:	GNU SmallTalk header files
@@ -66,7 +71,7 @@ Biblioteki statyczne dla GNU SmallTalka.
 %patch1 -p1
 
 %build
-%configure
+%configure2_13
 %{__make}
 
 %install
