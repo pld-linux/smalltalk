@@ -57,7 +57,7 @@ Biblioteki statyczne dla GNU SmallTalka.
 autoconf
 LDFLAGS="-s"; export LDFLAGS
 %configure
-make
+%{__make}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
