@@ -2,7 +2,7 @@ Summary:	GNU smalltalk (No X or emacs support)
 Summary(pl):	GNU smalltalk (Bez wsparcia dla X lub emacsa)
 Name:		smalltalk
 Version:	1.6.2
-Release:	4
+Release:	5
 Copyright:	GPL
 Group:		Development/Languages
 Group(pl):	Programowanie/Jêzyki
@@ -12,7 +12,7 @@ Patch1:		smalltalk-sysdep.patch
 Patch2:		smalltalk-info.patch
 PreReq:		/usr/sbin/fix-info-dir
 BuildRequires:	readline-devel
-BuildRequires:	ncurses-devel
+BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
