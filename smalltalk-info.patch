@@ -1,6 +1,6 @@
-diff -Nru smalltalk-1.95.1/docs/gst.texi smalltalk-1.95.1.new/docs/gst.texi
---- smalltalk-1.95.1/docs/gst.texi	Wed Jan 17 13:53:05 2001
-+++ smalltalk-1.95.1.new/docs/gst.texi	Wed Feb  7 18:05:00 2001
+diff -Nru smalltalk-1.95.9/doc/gst.texi smalltalk-1.95.9.new/doc/gst.texi
+--- smalltalk-1.95.9/doc/gst.texi	Wed Jan 17 13:53:05 2001
++++ smalltalk-1.95.9.new/doc/gst.texi	Wed Feb  7 18:05:00 2001
 @@ -89,9 +89,9 @@
  @end macro
  
