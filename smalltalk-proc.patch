@@ -1,0 +1,28 @@
+--- smalltalk-2.1.8/sigsegv/src/heur-ac.h.orig	Fri Jul 16 11:54:44 2004
++++ smalltalk-2.1.8/sigsegv/src/heur-ac.h	Fri Jul 16 12:10:58 2004
+@@ -32,8 +32,11 @@
+       stack_top = vma.end - 1;
+       return 0;
+     }
+-  else
+-    return -1;
++  else {
++    extern void *__libc_stack_end;
++    stack_top = __libc_stack_end;
++    return 0;
++  }
+ }
+ 
+ #define IS_STACK_OVERFLOW \
+--- smalltalk-2.1.8/sigsegv/src/stackvma-linux.c.orig	Fri Dec 19 17:01:08 2003
++++ smalltalk-2.1.8/sigsegv/src/stackvma-linux.c	Fri Jul 16 12:03:31 2004
+@@ -42,7 +42,8 @@
+         break;
+       while (c = getc (fp), c != EOF && c != '\n')
+         continue;
+-      if (address >= start && address <= end - 1)
++      if (address >= start && address <= end - 1 &&
++	  (start != end /* ignore maps hidden by PaX */))
+         {
+           vma->start = start;
+           vma->end = end;
