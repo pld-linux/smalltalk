@@ -5,8 +5,8 @@ diff -Nur smalltalk-1.95.9/configure.ac smalltalk-1.95.9.new/configure.ac
  dnl CURRENT:REVISION:AGE means this is the REVISION-th version of
  dnl the CURRENT-th interface; all the interface from CURRENT-AGE
  dnl to CURRENT are supported.
--AC_INIT([GNU Smalltalk], 2.0.6, help-smalltalk@gnu.org, smalltalk)
-+AC_INIT([GNU Smalltalk], 2.0.6, help-smalltalk@gnu.org, gnu-smalltalk)
- GST_REVISION(3:6:0)
+-AC_INIT([GNU Smalltalk], 2.0.11, help-smalltalk@gnu.org, smalltalk)
++AC_INIT([GNU Smalltalk], 2.0.11, help-smalltalk@gnu.org, gnu-smalltalk)
+ GST_REVISION(3:11:0)
  AC_CONFIG_AUX_DIR([config])
  AC_CONFIG_SRCDIR([main.c])
