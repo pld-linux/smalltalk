@@ -1,0 +1,70 @@
+--- smalltalk-2.1.8/sigsegv/src/handler-unix.c.orig	2003-12-19 17:01:08.000000000 +0100
++++ smalltalk-2.1.8/sigsegv/src/handler-unix.c	2004-07-16 21:48:33.121085905 +0200
+@@ -14,7 +14,7 @@
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software Foundation,
+    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+-
++#define _GNU_SOURCE
+ #include "sigsegv.h"
+ 
+ #include <stddef.h> /* needed for NULL on SunOS4 */
+--- smalltalk-2.1.8/sigsegv/src/fault-linux-x86_64.h.orig	2003-12-19 17:01:08.000000000 +0100
++++ smalltalk-2.1.8/sigsegv/src/fault-linux-x86_64.h	2004-07-16 21:53:05.857555189 +0200
+@@ -15,8 +15,10 @@
+    along with this program; if not, write to the Free Software Foundation,
+    Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+ 
+-#include <asm/sigcontext.h>
++#define _GNU_SOURCE
++#include <sys/ucontext.h>
+ 
+-#define SIGSEGV_FAULT_HANDLER_ARGLIST  int sig, struct sigcontext sc
+-#define SIGSEGV_FAULT_CONTEXT  (&sc)
+-#define SIGSEGV_FAULT_STACKPOINTER  sc.rsp
++#define SIGSEGV_FAULT_HANDLER_ARGLIST  int sig, siginfo_t *si, struct ucontext *ctx
++#define SIGSEGV_FAULT_ADDRESS  ((ctx)->uc_mcontext.gregs[REG_CR2])
++#define SIGSEGV_FAULT_CONTEXT  (ctx)
++#define SIGSEGV_FAULT_STACKPOINTER  ((ctx)->uc_mcontext.gregs[REG_RSP])
+--- smalltalk-2.1.8/sigsegv/configure.in.orig	2003-12-19 17:01:08.000000000 +0100
++++ smalltalk-2.1.8/sigsegv/configure.in	2004-07-16 22:41:19.496947430 +0200
+@@ -142,6 +142,15 @@
+       [action.sa_sigaction = &sigsegv_handler;
+        action.sa_flags = SA_SIGINFO;])
+   
++    SV_TRY_FAULT([Linux/x86_64], sv_cv_fault_linux_x86_64, [x86_64-*-linux*],
++      [#define _GNU_SOURCE
++       #include <sys/ucontext.h>
++       #ifndef REG_CR2
++       #  define REG_CR2 22
++       #endif],
++      [int sig, siginfo_t *si, struct ucontext *ctx],
++      [((ctx)->uc_mcontext.gregs[REG_CR2])])
++
+     SV_TRY_FAULT([Linux/i386], sv_cv_fault_linux_i386, [i?86-*-linux2.[2-9]*],
+       [#include <asm/sigcontext.h>],
+       [int sig, struct sigcontext sc],
+@@ -266,6 +275,12 @@
+       esac
+       FAULT_CONTEXT='struct sigcontext'
+     fi
++    if test "$CFG_FAULT" = fault-none.h && test "$sv_cv_fault_linux_x86_64" = yes; then
++      case "$host_cpu" in
++	x86_64) CFG_FAULT=fault-linux-x86_64.h ;;
++      esac
++      FAULT_CONTEXT='struct ucontext *'
++    fi
+     if test "$CFG_FAULT" = fault-none.h && test "$sv_cv_fault_linux_i386" = yes; then
+       case "$host_cpu" in
+         i?86 | x86_64) CFG_FAULT=fault-linux-i386.h ;;
+@@ -402,10 +417,6 @@
+               CFG_FAULT=fault-linux-sparc.h
+               FAULT_CONTEXT='struct sigcontext'
+               ;;
+-            x86_64)
+-              CFG_FAULT=fault-linux-x86_64.h
+-              FAULT_CONTEXT='struct sigcontext'
+-              ;;
+           esac
+           ;;
+         beos*)
