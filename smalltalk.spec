@@ -68,7 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_includedir},%{_mandir}/man1,%{_infodir}} \
 	$RPM_BUILD_ROOT{%{_applnkdir}/Development,%{_prefix}/X11R6/share/pixmaps}
 
-make DESTDIR=$RPM_BUILD_ROOT install
+%{__make} DESTDIR=$RPM_BUILD_ROOT install
 
 ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/gnu-smalltalk/gst
 
