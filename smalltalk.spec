@@ -6,18 +6,17 @@ Release:	1
 License:	GPL
 Group:		Development/Languages
 Group(pl):	Programowanie/Jêzyki
-Icon:		smalltalk.xpm
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
 Source1:	smalltalk.desktop
-Source2:	smalltalk.xpm
 Patch0:		smalltalk-DESTDIR.patch
 Patch1:		smalltalk-info.patch
+Icon:		smalltalk.xpm
 PreReq:		/usr/sbin/fix-info-dir
 BuildRequires:	readline-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	/tmp/%{name}-%{version}-root
 
-%define _applnkdir %{_prefix}/X11R6/share/applnkdir
+%define		_applnkdir %{_prefix}/X11R6/share/applnkdir
 
 %description
 The GNU smalltalk interpreter.
@@ -68,8 +67,8 @@ rm -rf $RPM_BUILD_ROOT
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{%{_includedir},%{_mandir}/man1,%{_infodir}} \
-	$RPM_BUILD_ROOT/{%{_applnkdir},%{_datadir}/pixmaps}
+install -d $RPM_BUILD_ROOT{%{_includedir},%{_mandir}/man1,%{_infodir}} \
+	$RPM_BUILD_ROOT{%{_applnkdir}/Development,%{_prefix}/X11R6/share/pixmaps}
 
 make DESTDIR=$RPM_BUILD_ROOT install
 
@@ -78,8 +77,8 @@ ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/gnu-smalltalk/gst
 gzip -9nf README docs/{AUTHORS,ChangeLog*,stamp-classes,todo,categories} \
 	docs/NEWS $RPM_BUILD_ROOT{%{_mandir}/man1/*,%{_infodir}/*}
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/pixmaps/minicom.xpm
-install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/minicom.desktop
+install $RPM_SOURCE_DIR/smalltalk.xpm $RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Development
 
 %post
 %{_sbindir}/fix-info-dir -c %{_infodir} >/dev/null 2>&1
@@ -97,8 +96,8 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/minicom.desktop
 %{_datadir}/gnu-smalltalk
 %{_infodir}/*
 %{_mandir}/man1/*
-%{_applnkdir}/*
-%{_datadir}/pixmaps/*
+%{_applnkdir}/Development/*
+%{_prefix}/X11R6/share/pixmaps/*
 
 %files devel
 %defattr(644,root,root,755)
