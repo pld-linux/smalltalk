@@ -62,7 +62,7 @@ Biblioteki statyczne dla GNU SmallTalka.
 
 %build
 autoconf
-automake -a -c
+automake -a -c -f
 %configure
 %{__make}
 
