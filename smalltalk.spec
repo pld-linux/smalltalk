@@ -1,19 +1,28 @@
-Summary:	GNU smalltalk (No X support)
-Summary(pl):	GNU smalltalk (Bez wsparcia dla X)
+Summary:	GNU smalltalk
+Summary(pl):	GNU smalltalk
 Name:		smalltalk
-Version:	2.0.11
+Version:	2.1.5
 Release:	1
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
-# Source0-md5:	8880b7137be0c1d84763a9049350ede1
+# Source0-md5:	ce993e99f7f3f65958840e4be7a3036e
 Source1:	%{name}.desktop
 Source2:	%{name}.png
-Patch0:		%{name}-info.patch
+#Patch0:		%{name}-info.patch
 Patch1:		%{name}-PACKAGE.patch
+Patch2:		%{name}-enums.patch
 Icon:		smalltalk.xpm
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:  gawk
+BuildRequires:	pkgconfig
+BuildRequires:  glib-devel >= 2.0.0
+BuildRequires:  gtk+-devel >= 2.0.0
+BuildRequires:  pango-devel >= 1.0.0
+BuildRequires:  atk-devel >= 1.0.0
+BuildRequires:  gdbm-devel
+#BuildRequires:  xemacs
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	readline-devel >= 4.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -60,15 +69,16 @@ Biblioteki statyczne dla GNU SmallTalka.
 
 %prep
 %setup -q
-%patch0 -p1
+#%patch0 -p1
 %patch1 -p1
+%patch2 -p1 
 
 %build
 %{__aclocal} -I snprintfv -I config
 %{__autoconf}
 %{__automake}
-%configure
-%{__make}
+%configure AWK=gawk
+%{__make} 
 
 %install
 rm -rf $RPM_BUILD_ROOT
