@@ -1,0 +1,4 @@
+- added .xpm icon
+- added .desktop file
+- new package (smalltalk-emacs)
+- changed path from %{_datadir}/smalltalk to %{_datadir}/gnu-smalltalk
