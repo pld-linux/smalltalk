@@ -51,19 +51,6 @@ The GNU SmallTalk static libraries.
 %description static -l pl
 Biblioteki statyczne dla GNU SmallTalka.
 
-%package emacs
-Summary:	Emacs macros to use with GNU Smalltalk
-Summary(pl):	Makra dla Emacsa do u¿ytku razem z GNU Smalltalkiem
-Group:		Developement/Utilities
-Requires:	%{name} = %{version}
-
-%description emacs
-A set of macros making work with GNU Smalltalk under Emacs more
-comfortable
-
-%description emacs -l pl
-Zbiór makr u³atwiaj±cych pracê z GNU Smalltalkiem pod Emacsem
-
 %prep
 %setup -q
 %patch0 -p1
@@ -105,6 +92,7 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/minicom.desktop
 %doc README.gz docs/AUTHORS.gz docs/ChangeLog*.gz
 %doc docs/DOM.html docs/stamp-classes.gz
 %doc docs/todo.gz docs/NEWS.gz docs/categories.gz
+%doc emacs
 %attr (755,root,root) %{_bindir}/gst
 %{_datadir}/gnu-smalltalk
 %{_infodir}/*
