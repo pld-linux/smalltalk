@@ -12,7 +12,6 @@ Source2:	smalltalk.png
 Patch0:		smalltalk-DESTDIR.patch
 Patch1:		smalltalk-info.patch
 Icon:		smalltalk.xpm
-PreReq:		/usr/sbin/fix-info-dir
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -80,10 +79,10 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Development
 install %{SOURCE2} $RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
 
 %post
-%{_sbindir}/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %postun
-%{_sbindir}/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %files
 %defattr(644,root,root,755)
