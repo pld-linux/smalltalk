@@ -24,7 +24,7 @@ BuildRequires:	automake
 BuildRequires:	gawk
 BuildRequires:	gdbm-devel
 BuildRequires:	glib2-devel >= 2.0.0
-BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	gtk+2-devel >= 1:2.0.0
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	ncurses-devel >= 5.0
