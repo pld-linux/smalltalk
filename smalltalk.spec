@@ -15,9 +15,7 @@ Icon:		smalltalk.xpm
 PreReq:		/usr/sbin/fix-info-dir
 BuildRequires:	readline-devel >= 4.1
 BuildRequires:	ncurses-devel >= 5.0
-BuildRoot:	/tmp/%{name}-%{version}-root
-
-%define		_applnkdir 	%{_prefix}/X11R6/share/applnk
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The GNU smalltalk interpreter.
