@@ -11,8 +11,10 @@ Source2:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-PACKAGE.patch
 Icon:		smalltalk.xpm
-BuildRequires:	readline-devel >= 4.2
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	readline-devel >= 4.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -77,8 +79,6 @@ ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/gnu-smalltalk/gst
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Development
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-gzip -9nf AUTHORS NEWS README THANKS
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -90,16 +90,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc AUTHORS NEWS README THANKS
 %attr (755,root,root) %{_bindir}/gst
 %{_datadir}/gnu-smalltalk
 %{_infodir}/gst*
 %{_mandir}/man1/*
 %{_applnkdir}/Development/*
-%{_prefix}/X11R6/share/pixmaps/*
+%{_pixmapsdir}/*
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.gz
 %attr (755,root,root) %{_bindir}/gst-config
 %attr (755,root,root) %{_bindir}/gst-package
 %{_includedir}/*
