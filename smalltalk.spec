@@ -2,19 +2,20 @@ Summary:	GNU smalltalk
 Summary(pl):	GNU smalltalk
 Name:		smalltalk
 Version:	2.1.5
-Release:	1
+Release:	1.1
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
 # Source0-md5:	ce993e99f7f3f65958840e4be7a3036e
 Source1:	%{name}.desktop
 Source2:	%{name}.png
-#Patch0:		%{name}-info.patch
+Patch0:		%{name}-info.patch
 Patch1:		%{name}-PACKAGE.patch
 Patch2:		%{name}-enums.patch
+Patch3:		%{name}-nolibs.patch
 Icon:		smalltalk.xpm
 BuildRequires:	atk-devel >= 1.0.0
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	gawk
 BuildRequires:	gdbm-devel
@@ -24,6 +25,7 @@ BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	pango-devel >= 1.0.0
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel >= 4.2
+BuildRequires:	tk-devel >= 8.4
 #BuildRequires:  xemacs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -46,8 +48,8 @@ wersja dla systemów komercyjnych, takich jak M$-NT.
 %package devel
 Summary:	GNU SmallTalk header files
 Summary(pl):	Pliki nag³ówkowe dla GNU SmallTalka
-Group:		Libraries
-Requires:	%{name} = %{version}
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 The GNU SmallTalk header files.
@@ -58,8 +60,11 @@ Pliki nag³ówkowe dla GNU SmallTalka.
 %package static
 Summary:	Static libraries for GNU Smalltalk
 Summary(pl):	Biblioteki statyczne dla GNU Smalltalka
-Group:		Libraries
-Requires:	%{name}-devel = %{version}
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+# to be moved to -devel if shared libgst exists
+Requires:	gmp-devel
+Requires:	readline-devel
 
 %description static
 The GNU SmallTalk static libraries.
@@ -67,11 +72,48 @@ The GNU SmallTalk static libraries.
 %description static -l pl
 Biblioteki statyczne dla GNU SmallTalka.
 
+%package tk
+Summary:	blox-tk module for GNU Smalltalk
+Summary(pl):	Modu³ blox-tk dla GNU Smalltalka
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description tk
+blox-tk module for GNU Smalltalk.
+
+%description tk -l pl
+Modu³ blox-tk dla GNU Smalltalka.
+
+%package gdbm
+Summary:	GDBM module for GNU Smalltalk
+Summary(pl):	Modu³ GDBM dla GNU Smalltalka
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description gdbm
+GDBM module for GNU Smalltalk.
+
+%description gdbm -l pl
+Modu³ GDBM dla GNU Smalltalka.
+
+%package gtk
+Summary:	GTK module for GNU Smalltalk
+Summary(pl):	Modu³ GTK dla GNU Smalltalka
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description gtk
+GTK module for GNU Smalltalk.
+
+%description gtk -l pl
+Modu³ GTK dla GNU Smalltalka.
+
 %prep
 %setup -q
-#%patch0 -p1
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1 
+%patch3 -p1 
 
 %build
 %{__aclocal} -I snprintfv -I config
@@ -93,6 +135,11 @@ ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/gnu-smalltalk/gst
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Development
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
+# no static modules (*.la used by ltdl)
+rm -f $RPM_BUILD_ROOT%{_libdir}/gnu-smalltalk/*.a
+# doesn't belong here
+rm -rf $RPM_BUILD_ROOT{%{_aclocaldir}/snprintfv.m4,%{_includedir}/snprintfv}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -107,7 +154,14 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS NEWS README THANKS
 %attr (755,root,root) %{_bindir}/gst
 %dir %{_libdir}/gnu-smalltalk
-%attr (755,root,root) %{_libdir}/gnu-smalltalk/*.so
+%attr (755,root,root) %{_libdir}/gnu-smalltalk/i18n*.so
+%{_libdir}/gnu-smalltalk/i18n.la
+%attr (755,root,root) %{_libdir}/gnu-smalltalk/md5*.so
+%{_libdir}/gnu-smalltalk/md5.la
+%attr (755,root,root) %{_libdir}/gnu-smalltalk/regex*.so
+%{_libdir}/gnu-smalltalk/regex.la
+%attr (755,root,root) %{_libdir}/gnu-smalltalk/tcp*.so
+%{_libdir}/gnu-smalltalk/tcp.la
 %{_datadir}/gnu-smalltalk
 %{_infodir}/gst*
 %{_mandir}/man1/*
@@ -118,12 +172,26 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr (755,root,root) %{_bindir}/gst-config
 %attr (755,root,root) %{_bindir}/gst-package
-%{_libdir}/lib*.la
-%{_libdir}/gnu-smalltalk/*.la
-%{_includedir}/*
-%{_aclocaldir}/*.m4
+%{_includedir}/*.h
+%{_aclocaldir}/gst.m4
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
-%{_libdir}/gnu-smalltalk/*.a
+# no shared lib, so it's here... to be moved to -devel if shared exists
+%{_libdir}/lib*.la
+
+%files tk
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/gnu-smalltalk/blox-tk*.so
+%{_libdir}/gnu-smalltalk/blox-tk.la
+
+%files gdbm
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/gnu-smalltalk/gdbm*.so
+%{_libdir}/gnu-smalltalk/gdbm.la
+
+%files gtk
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/gnu-smalltalk/gst-gtk*.so
+%{_libdir}/gnu-smalltalk/gst-gtk.la
