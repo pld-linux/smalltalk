@@ -2,7 +2,7 @@ Summary:	GNU smalltalk (No X support)
 Summary(pl):	GNU smalltalk (Bez wsparcia dla X)
 Name:		smalltalk
 Version:	1.95.9
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Languages
 Group(de):	Entwicklung/Sprachen
@@ -102,7 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr (755,root,root) %{_bindir}/gst
 %{_datadir}/gnu-smalltalk
-%{_infodir}/*
+%{_infodir}/gst*
 %{_mandir}/man1/*
 %{_applnkdir}/Development/*
 %{_prefix}/X11R6/share/pixmaps/*
