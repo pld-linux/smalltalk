@@ -1,8 +1,8 @@
 Summary:	GNU smalltalk (No X support)
 Summary(pl):	GNU smalltalk (Bez wsparcia dla X)
 Name:		smalltalk
-Version:	1.95.10
-Release:	1
+Version:	2.0.6
+Release:	0.1
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
@@ -63,6 +63,7 @@ Biblioteki statyczne dla GNU SmallTalka.
 %patch1 -p1
 
 %build
+%{__aclocal} -I snprintfv -I config
 %{__autoconf}
 %{__automake}
 %configure
@@ -93,6 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS NEWS README THANKS
 %attr (755,root,root) %{_bindir}/gst
 %{_datadir}/gnu-smalltalk
+%attr (755,root,root) %{_libdir}/gnu-smalltalk/*.so
 %{_infodir}/gst*
 %{_mandir}/man1/*
 %{_applnkdir}/Development/*
@@ -102,8 +104,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr (755,root,root) %{_bindir}/gst-config
 %attr (755,root,root) %{_bindir}/gst-package
+%{_libdir}/lib*.la
+%{_libdir}/gnu-smalltalk/*.la
 %{_includedir}/*
+%{_aclocaldir}/*.m4
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libgst.a
+%{_libdir}/lib*.a
+%{_libdir}/gnu-smalltalk/*.a
