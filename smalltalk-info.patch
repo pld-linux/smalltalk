@@ -1,8 +1,8 @@
-diff -Nru smalltalk-1.6.2/docs/gst.txi smalltalk-1.6.2.new/docs/gst.txi
---- smalltalk-1.6.2/docs/gst.txi	Sun Aug 29 11:38:52 1999
-+++ smalltalk-1.6.2.new/docs/gst.txi	Sat Oct 16 00:55:14 1999
-@@ -24,9 +24,9 @@
- @end ifinfo
+diff -Nru smalltalk-1.95.1/docs/gst.texi smalltalk-1.95.1.new/docs/gst.texi
+--- smalltalk-1.95.1/docs/gst.texi	Wed Jan 17 13:53:05 2001
++++ smalltalk-1.95.1.new/docs/gst.texi	Wed Feb  7 18:05:00 2001
+@@ -89,9 +89,9 @@
+ @end macro
  
  @ifinfo
 -@dircategory GNU Smalltalk
@@ -12,4 +12,4 @@ diff -Nru smalltalk-1.6.2/docs/gst.txi smalltalk-1.6.2.new/docs/gst.txi
 +* GNU Smalltalk: (gst).			The GNU Smalltalk environment
  @end direntry
  
- This file documents GNU Smalltalk Version @value{VERSION}.
+ This file documents @gst{} Version @value{VERSION}.
