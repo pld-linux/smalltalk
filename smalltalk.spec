@@ -2,10 +2,12 @@ Summary:	GNU smalltalk (No X support)
 Summary(pl):	GNU smalltalk (Bez wsparcia dla X)
 Name:		smalltalk
 Version:	2.0.6
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Development/Languages
-Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
+# Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
+Source0:	smalltalk/%{name}-%{version}.tar.gz
+# Source0-md5:	c2b7c1190181d02360ac98afcdab6b6e
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-info.patch
