@@ -2,7 +2,7 @@ Summary:	GNU smalltalk
 Summary(pl):	GNU smalltalk
 Name:		smalltalk
 Version:	2.1.8
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
@@ -32,7 +32,7 @@ BuildRequires:	pango-devel >= 1:1.0.0
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel >= 4.2
 BuildRequires:	tk-devel >= 8.4
-#BuildRequires:  xemacs
+#BuildRequires:	xemacs
 # 2.1.x versions won't work correctly on amd64 and alpha (on amd64 crashes
 # even on build time) because of calling convention (no registers support)
 # it should be fixed in devel (2.1e) version (but alloc,amd64 patches seem
