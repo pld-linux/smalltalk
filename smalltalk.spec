@@ -1,19 +1,20 @@
 Summary:	GNU smalltalk
 Summary(pl):	GNU smalltalk
 Name:		smalltalk
-Version:	2.1.5
-Release:	3
+Version:	2.1.8
+Release:	1
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
-# Source0-md5:	ce993e99f7f3f65958840e4be7a3036e
+# Source0-md5:	dd55006e41c87ddbf90f7cd2166b290b
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-PACKAGE.patch
-Patch2:		%{name}-enums.patch
-Patch3:		%{name}-nolibs.patch
+Patch2:		%{name}-nolibs.patch
+Patch3:		%{name}-aligned.patch
 Icon:		smalltalk.xpm
+URL:		http://www.gnu.org/software/smalltalk/
 BuildRequires:	atk-devel >= 1.0.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -117,22 +118,16 @@ Modu³ GTK dla GNU Smalltalka.
 %patch2 -p1 
 %patch3 -p1 
 
+cp -f %{_aclocaldir}/libtool.m4 config
+
 %build
-cd libltdl
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-cd ../sigsegv
-%{__libtoolize}
+cd sigsegv
 %{__aclocal} -I ../config
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 cd ../snprintfv
-%{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I ../config
 %{__autoconf}
 %{__autoheader}
 # intentionally no automake here
@@ -142,15 +137,11 @@ cd ..
 %{__autoconf}
 %{__automake}
 %configure \
-	AWK=gawk \
-%ifarch sparc sparc64 sparcv9
-	gst_cv_double_alignment=8 \
-	gst_cv_long_double_alignment=8
-# alignment test is too weak for sparc (it can perform only some instructions
-# on misaligned doubles; e.g. ldd seems to work, but std on %%o4 causes SIGBUS)
-%endif
+	AWK=gawk
 
-%{__make} 
+# gtk things are generated improperly when some locale are set
+%{__make} \
+	LC_ALL=C
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -183,6 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS NEWS README THANKS
 %attr (755,root,root) %{_bindir}/gst
 %dir %{_libdir}/gnu-smalltalk
+%{_libdir}/gnu-smalltalk/libc.la
 %attr (755,root,root) %{_libdir}/gnu-smalltalk/i18n*.so
 %{_libdir}/gnu-smalltalk/i18n.la
 %attr (755,root,root) %{_libdir}/gnu-smalltalk/md5*.so
