@@ -2,7 +2,7 @@ Summary:	GNU smalltalk
 Summary(pl):	GNU smalltalk
 Name:		smalltalk
 Version:	2.1.5
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
@@ -153,14 +153,14 @@ cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Development,%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/gnu-smalltalk/gst
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Development
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 # no static modules (*.la used by ltdl)
@@ -193,7 +193,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnu-smalltalk
 %{_infodir}/gst*
 %{_mandir}/man1/*
-%{_applnkdir}/Development/*
+%{_desktopdir}/*
 %{_pixmapsdir}/*
 
 %files devel
