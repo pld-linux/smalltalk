@@ -6,7 +6,7 @@ Release:	1
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
-# Source0-md5:	c2b7c1190181d02360ac98afcdab6b6e
+# Source0-md5:	8880b7137be0c1d84763a9049350ede1
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-info.patch
