@@ -1,0 +1,10 @@
+diff -Nru smalltalk-1.95.1/kernel/Makefile.am smalltalk-1.95.1.new/kernel/Makefile.am
+--- smalltalk-1.95.1/kernel/Makefile.am	Sat Jan 20 14:09:14 2001
++++ smalltalk-1.95.1.new/kernel/Makefile.am	Wed Feb  7 19:50:53 2001
+@@ -33,5 +33,5 @@
+ # install-exec, so the gst executable is already in bindir.
+ 
+ install-data-local:
+-	cd $(basedir) && $(bindir)/gst -Vi dummyFile
++	cd $(basedir) && $(DESTDIR)$(bindir)/gst -Vi dummyFile
+ 
