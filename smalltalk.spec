@@ -5,8 +5,6 @@ Version:	1.95.10
 Release:	1
 License:	GPL
 Group:		Development/Languages
-Group(de):	Entwicklung/Sprachen
-Group(pl):	Programowanie/JÍzyki
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
@@ -37,13 +35,6 @@ Jest nawet wersja dla systemÛw komercyjnych, takich jak M$-NT.
 Summary:	GNU SmallTalk header files
 Summary(pl):	Pliki nag≥Ûwkowe dla GNU SmallTalka
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	‚…¬Ã…œ‘≈À…
-Group(uk):	‚¶¬Ã¶œ‘≈À…
 Requires:	%{name} = %{version}
 
 %description devel
@@ -56,13 +47,6 @@ Pliki nag≥Ûwkowe dla GNU SmallTalka.
 Summary:	Static libraries for GNU Smalltalk
 Summary(pl):	Biblioteki statyczne dla GNU Smalltalka
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	‚…¬Ã…œ‘≈À…
-Group(uk):	‚¶¬Ã¶œ‘≈À…
 Requires:	%{name}-devel = %{version}
 
 %description static
