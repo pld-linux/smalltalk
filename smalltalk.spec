@@ -14,6 +14,8 @@ Patch1:		%{name}-PACKAGE.patch
 Patch2:		%{name}-nolibs.patch
 Patch3:		%{name}-aligned.patch
 Patch4:		%{name}-proc.patch
+Patch5:		%{name}-alloc.patch
+Patch6:		%{name}-amd64.patch
 Icon:		smalltalk.xpm
 URL:		http://www.gnu.org/software/smalltalk/
 BuildRequires:	atk-devel >= 1.0.0
@@ -119,6 +121,8 @@ Modu³ GTK dla GNU Smalltalka.
 %patch2 -p1 
 %patch3 -p1 
 %patch4 -p1 
+%patch5 -p1 
+%patch6 -p1 
 
 cp -f %{_aclocaldir}/libtool.m4 config
 
