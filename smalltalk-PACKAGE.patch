@@ -1,12 +1,11 @@
-diff -Nur smalltalk-1.95.9/configure.ac smalltalk-1.95.9.new/configure.ac
---- smalltalk-1.95.9/configure.ac	Tue Jan 15 19:26:39 2002
-+++ smalltalk-1.95.9.new/configure.ac	Mon Jan 21 14:24:40 2002
-@@ -15,7 +15,7 @@
+--- smalltalk-2.1.5/configure.ac.orig	2003-09-04 07:52:37.000000000 +0200
++++ smalltalk-2.1.5/configure.ac	2003-12-12 23:57:36.000000000 +0100
+@@ -7,7 +7,7 @@
+ dnl Process this file with autoconf to produce a configure script.
+ 
+ AC_PREREQ(2.52)
+-AC_INIT([GNU Smalltalk], 2.1.5, help-smalltalk@gnu.org, smalltalk)
++AC_INIT([GNU Smalltalk], 2.1.5, help-smalltalk@gnu.org, gnu-smalltalk)
+ MAINTAINER="bonzini@gnu.org"
+ 
  dnl CURRENT:REVISION:AGE means this is the REVISION-th version of
- dnl the CURRENT-th interface; all the interface from CURRENT-AGE
- dnl to CURRENT are supported.
--AC_INIT([GNU Smalltalk], 2.0.11, help-smalltalk@gnu.org, smalltalk)
-+AC_INIT([GNU Smalltalk], 2.0.11, help-smalltalk@gnu.org, gnu-smalltalk)
- GST_REVISION(3:11:0)
- AC_CONFIG_AUX_DIR([config])
- AC_CONFIG_SRCDIR([main.c])
