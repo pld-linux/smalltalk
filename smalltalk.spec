@@ -53,7 +53,7 @@ GNU Smalltalk jest Woln± (lub Open Source) implementacj± tak blisk±
 jêzykowi Smalltalk-80 jak to jest opisane w ksi±¿ce Smalltalk-80: the
 Language and its Implementation napisanej przez Adele Goldberg oraz
 David Robson. GNUSmalltalk dzia³a na wiêkszo¶ci wersji Unix'ów lub
-systemów Unikso-podobnych (GNU/Linux, FreeBSD, etc...). Jest nawet
+systemów uniksopodobnych (GNU/Linux, FreeBSD, etc...). Jest nawet
 wersja dla systemów komercyjnych, takich jak M$-NT.
 
 %package devel
