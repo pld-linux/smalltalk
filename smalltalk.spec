@@ -31,6 +31,7 @@ BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	pango-devel >= 1:1.0.0
 BuildRequires:	pkgconfig
 BuildRequires:	readline-devel >= 4.2
+BuildRequires:	texinfo
 BuildRequires:	tk-devel >= 8.4
 #BuildRequires:	xemacs
 # 2.1.x versions won't work correctly on amd64 and alpha (on amd64 crashes
