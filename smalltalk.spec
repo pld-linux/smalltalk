@@ -65,6 +65,8 @@ rm -rf $RPM_BUILD_ROOT
 
 make DESTDIR=$RPM_BUILD_ROOT install 
 
+ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/smalltalk/gst
+
 gzip -9nf README docs/AUTHORS \
 	$RPM_BUILD_ROOT{%{_mandir}/man1/*,%{_infodir}/*}
 
