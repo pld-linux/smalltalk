@@ -1,0 +1,13 @@
+fault_address isn't always aligned properly for reading of pointer
+(i.e. OOP, which is struct OOP *) - so read only one byte.
+--- smalltalk-2.1.8/libgst/oop.c.orig	2004-01-09 13:05:15.000000000 +0100
++++ smalltalk-2.1.8/libgst/oop.c	2004-07-15 16:58:13.000000000 +0200
+@@ -856,7 +856,7 @@
+     }
+ 
+   /* Try accessing the page */
+-  (void) *(volatile OOP *) fault_address;
++  (void) *(volatile char *) fault_address;
+   reentering = 0;
+ 
+ #if defined (MMAN_DEBUGGING)
