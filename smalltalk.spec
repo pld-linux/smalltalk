@@ -108,16 +108,16 @@ GDBM module for GNU Smalltalk.
 Modu³ GDBM dla GNU Smalltalka.
 
 %package gtk
-Summary:	GTK module for GNU Smalltalk
-Summary(pl):	Modu³ GTK dla GNU Smalltalka
+Summary:	GTK+ module for GNU Smalltalk
+Summary(pl):	Modu³ GTK+ dla GNU Smalltalka
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description gtk
-GTK module for GNU Smalltalk.
+GTK+ module for GNU Smalltalk.
 
 %description gtk -l pl
-Modu³ GTK dla GNU Smalltalka.
+Modu³ GTK+ dla GNU Smalltalka.
 
 %prep
 %setup -q
