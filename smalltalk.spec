@@ -2,7 +2,7 @@ Summary:	GNU smalltalk
 Summary(pl):	GNU smalltalk
 Name:		smalltalk
 Version:	2.1.5
-Release:	1.1
+Release:	2
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
@@ -141,7 +141,14 @@ cd ..
 %{__autoconf}
 %{__automake}
 %configure \
-	AWK=gawk
+	AWK=gawk \
+%ifarch sparc sparc64 sparcv9
+	gst_cv_double_alignment=8 \
+	gst_cv_long_double_alignment=8
+# alignment test is too weak for sparc (it can perform only some instructions
+# on misaligned doubles; e.g. ldd seems to work, but std on %%o4 causes SIGBUS)
+%endif
+
 %{__make} 
 
 %install
