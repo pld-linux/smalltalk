@@ -1,8 +1,8 @@
 Summary:	GNU smalltalk (No X support)
 Summary(pl):	GNU smalltalk (Bez wsparcia dla X)
 Name:		smalltalk
-Version:	1.95.1
-Release:	3
+Version:	1.95.9
+Release:	1
 License:	GPL
 Group:		Development/Languages
 Group(de):	Entwicklung/Sprachen
@@ -11,7 +11,7 @@ Source0:	ftp://prep.ai.mit.edu/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-info.patch
-Patch1:		%{name}-install.patch
+Patch1:		%{name}-PACKAGE.patch
 Icon:		smalltalk.xpm
 BuildRequires:	readline-devel >= 4.2
 BuildRequires:	ncurses-devel >= 5.0
@@ -71,7 +71,9 @@ Biblioteki statyczne dla GNU SmallTalka.
 %patch1 -p1
 
 %build
-%configure2_13
+autoconf
+automake -a -c
+%configure
 %{__make}
 
 %install
