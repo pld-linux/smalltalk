@@ -26,6 +26,7 @@ Summary(pl):	Pliki nag³ówkowe dla GNU SmallTalka
 Group:		Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Biblioteki
+Requires:	%{name} = %{version}
 
 %description devel
 The GNU SmallTalk header files.
@@ -39,6 +40,7 @@ Summary(pl):	Biblioteki statyczne dla GNU Smalltalka
 Group:		Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Biblioteki
+Requires:	%{name}-devel = %{version}
 
 %description static
 The GNU SmallTalk static libraries.
