@@ -21,6 +21,7 @@ BuildRequires:	gawk
 BuildRequires:	gdbm-devel
 BuildRequires:	glib2-devel >= 2.0.0
 BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	libtool >= 2:1.5
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	pango-devel >= 1.0.0
 BuildRequires:	pkgconfig
@@ -116,6 +117,26 @@ Modu³ GTK dla GNU Smalltalka.
 %patch3 -p1 
 
 %build
+cd libltdl
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+cd ../sigsegv
+%{__libtoolize}
+%{__aclocal} -I ../config
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+cd ../snprintfv
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+# intentionally no automake here
+cd ..
+%{__libtoolize}
 %{__aclocal} -I snprintfv -I config
 %{__autoconf}
 %{__automake}
