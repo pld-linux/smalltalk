@@ -7,3 +7,4 @@ Exec=gst -q -
 Terminal=true
 Type=Application
 Icon=smalltalk.png
+# vi: encoding=utf-8
