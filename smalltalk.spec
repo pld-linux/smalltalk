@@ -16,7 +16,7 @@ BuildRequires:	readline-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	/tmp/%{name}-%{version}-root
 
-%define		_applnkdir %{_prefix}/X11R6/share/applnkdir
+%define		_applnkdir %{_prefix}/X11R6/share/applnk
 
 %description
 The GNU smalltalk interpreter.
