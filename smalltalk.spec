@@ -55,7 +55,6 @@ Biblioteki statyczne dla GNU SmallTalka.
 
 %build
 autoconf
-LDFLAGS="-s"; export LDFLAGS
 %configure
 %{__make}
 
@@ -64,7 +63,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT{%{_includedir},%{_mandir}/man1,%{_infodir}} \
 	$RPM_BUILD_ROOT{%{_applnkdir}/Development,%{_prefix}/X11R6/share/pixmaps}
 
@@ -72,11 +70,11 @@ install -d $RPM_BUILD_ROOT{%{_includedir},%{_mandir}/man1,%{_infodir}} \
 
 ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/gnu-smalltalk/gst
 
-gzip -9nf README docs/{AUTHORS,ChangeLog*,stamp-classes,todo,categories} \
-	docs/NEWS $RPM_BUILD_ROOT{%{_mandir}/man1/*,%{_infodir}/*}
-
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Development
 install %{SOURCE2} $RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
+
+gzip -9nf README docs/{AUTHORS,ChangeLog*,stamp-classes,todo,categories} \
+	docs/NEWS 
 
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
