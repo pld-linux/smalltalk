@@ -1,0 +1,11 @@
+--- smalltalk-2.1.5/gtk/Makefile.am.orig	2003-09-15 12:00:31.000000000 +0200
++++ smalltalk-2.1.5/gtk/Makefile.am	2003-12-13 01:20:01.000000000 +0100
+@@ -145,7 +145,7 @@
+ 	xargs ./cpp < .order | ./funcs > Funcs.st
+ 
+ enums.c: mk_enums cpp .order $(LOCAL_FILES)
+-	xargs ./cpp < .order | ./mk_enums > enums.c
++	xargs ./cpp < .order | ./mk_enums | grep -v stored > enums.c
+ 
+ sigtable.c: sigtable cpp .order $(LOCAL_FILES)
+ 	xargs ./cpp < .order | ./sigtable > sigtable.c
