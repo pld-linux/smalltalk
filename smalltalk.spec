@@ -1,8 +1,8 @@
 Summary:	GNU smalltalk (No X support)
 Summary(pl):	GNU smalltalk (Bez wsparcia dla X)
 Name:		smalltalk
-Version:	1.95.9
-Release:	2
+Version:	1.95.10
+Release:	1
 License:	GPL
 Group:		Development/Languages
 Group(de):	Entwicklung/Sprachen
