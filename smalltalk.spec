@@ -2,7 +2,7 @@ Summary:	GNU smalltalk (No X support)
 Summary(pl):	GNU smalltalk (Bez wsparcia dla X)
 Name:		smalltalk
 Version:	1.7
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Languages
 Group(pl):	Programowanie/Jêzyki
