@@ -8,6 +8,7 @@ Group:		Development/Languages
 Group(pl):	Programowanie/Jêzyki
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
 Source1:	smalltalk.desktop
+Source2:	smalltalk.png
 Patch0:		smalltalk-DESTDIR.patch
 Patch1:		smalltalk-info.patch
 Icon:		smalltalk.xpm
@@ -77,8 +78,8 @@ ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/gnu-smalltalk/gst
 gzip -9nf README docs/{AUTHORS,ChangeLog*,stamp-classes,todo,categories} \
 	docs/NEWS $RPM_BUILD_ROOT{%{_mandir}/man1/*,%{_infodir}/*}
 
-install $RPM_SOURCE_DIR/smalltalk.xpm $RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Development
+install %{SOURCE2} $RPM_BUILD_ROOT%{_prefix}/X11R6/share/pixmaps
 
 %post
 %{_sbindir}/fix-info-dir -c %{_infodir} >/dev/null 2>&1
