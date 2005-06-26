@@ -1,21 +1,19 @@
 Summary:	GNU smalltalk
 Summary(pl):	GNU smalltalk
 Name:		smalltalk
-Version:	2.1.8
-Release:	3
+Version:	2.1.11
+Release:	1
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
-# Source0-md5:	dd55006e41c87ddbf90f7cd2166b290b
+# Source0-md5:	169473d38c0ef86dc2ce40d785046840
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-PACKAGE.patch
 Patch2:		%{name}-nolibs.patch
-Patch3:		%{name}-aligned.patch
-Patch4:		%{name}-proc.patch
-Patch5:		%{name}-alloc.patch
-Patch6:		%{name}-amd64.patch
+Patch3:		%{name}-proc.patch
+Patch4:		%{name}-amd64.patch
 Icon:		smalltalk.xpm
 URL:		http://www.gnu.org/software/smalltalk/
 BuildRequires:	atk-devel >= 1.0.0
@@ -127,9 +125,8 @@ Modu³ GTK+ dla GNU Smalltalka.
 %patch1 -p1
 %patch2 -p1 
 %patch3 -p1 
-%patch4 -p1 
-%patch5 -p1 
-%patch6 -p1 
+# why patch to excluded architecture?
+# %patch4 -p1 
 
 cp -f %{_aclocaldir}/libtool.m4 config
 
