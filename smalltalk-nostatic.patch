@@ -1,0 +1,19 @@
+--- smalltalk-2.2/Makefile.am.orig	2005-11-21 17:17:52.000000000 +0100
++++ smalltalk-2.2/Makefile.am	2005-12-04 11:23:49.000000000 +0100
+@@ -111,7 +111,7 @@
+ # By default, we do not build the installed VM as a shared library: it is
+ # a bit slower, and on x86 we also exchange the PIC register for the frame
+ # which makes the VM undebuggable except with very recent (3.4) gcc.
+-gst_LDFLAGS = -export-dynamic -static
++gst_LDFLAGS = -export-dynamic
+ 
+ nodist_noinst_HEADERS = config.h
+ DISTCLEANFILES += config.h
+@@ -172,6 +172,7 @@
+ 	rm -f gst.im; \
+ 	SMALLTALK_KERNEL="`pwd`/kernel" \
+ 	SMALLTALK_IMAGE="`pwd`" \
++	LD_LIBRARY_PATH=$(DESTDIR)$(libdir) \
+ 	  $(DESTDIR)$(bindir)/gst -f $$srcdir/scripts/Finish.st "$(DESTDIR)" $(MODULES)
+ 
+ uninstall-local:: gst-package
