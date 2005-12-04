@@ -1,12 +1,12 @@
 Summary:	GNU smalltalk
 Summary(pl):	GNU smalltalk
 Name:		smalltalk
-Version:	2.1.11
-Release:	2
+Version:	2.2
+Release:	0.1
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
-# Source0-md5:	169473d38c0ef86dc2ce40d785046840
+# Source0-md5:	f092bb42f6cf52b429dba8640f8bf810
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-info.patch
@@ -14,6 +14,7 @@ Patch1:		%{name}-PACKAGE.patch
 Patch2:		%{name}-nolibs.patch
 Patch3:		%{name}-proc.patch
 Patch4:		%{name}-amd64.patch
+Patch5:		%{name}-nostatic.patch
 Icon:		smalltalk.xpm
 URL:		http://www.gnu.org/software/smalltalk/
 BuildRequires:	atk-devel >= 1.0.0
@@ -33,11 +34,7 @@ BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	texinfo
 BuildRequires:	tk-devel >= 8.4
 #BuildRequires:	xemacs
-# 2.1.x versions won't work correctly on x86_64 and alpha (on x86_64 crashes
-# even on build time) because of calling convention (no registers support)
-# it should be fixed in devel (2.1e) version (but alloc,amd64 patches seem
-# still needed there)
-ExcludeArch:	%{x8664} alpha
+Requires(post,postun):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -125,13 +122,18 @@ Modu³ GTK+ dla GNU Smalltalka.
 %patch1 -p1
 %patch2 -p1 
 %patch3 -p1 
-# why patch to excluded architecture?
-# %patch4 -p1 
+#%patch4 -p1  not needed?
+%patch5 -p1 
 
-cp -f %{_aclocaldir}/libtool.m4 config
+rm -f config/libtool.m4
 
 %build
-cd sigsegv
+cd libffi
+%{__aclocal} -I ../config
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+cd ../sigsegv
 %{__aclocal} -I ../config
 %{__autoconf}
 %{__autoheader}
@@ -174,28 +176,34 @@ rm -rf $RPM_BUILD_ROOT{%{_aclocaldir}/snprintfv.m4,%{_includedir}/snprintfv}
 rm -rf $RPM_BUILD_ROOT
 
 %post
+/sbin/ldconfig
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %postun
+/sbin/ldconfig
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README THANKS
-%attr (755,root,root) %{_bindir}/gst
+%attr(755,root,root) %{_bindir}/gst
+%attr(755,root,root) %{_bindir}/gst-load
+%attr(755,root,root) %{_bindir}/gst-reload
+%attr(755,root,root) %{_bindir}/gst-sunit
+%attr(755,root,root) %{_libdir}/libgst.so.*.*.*
 %dir %{_libdir}/gnu-smalltalk
 %{_libdir}/gnu-smalltalk/libc.la
-%attr (755,root,root) %{_libdir}/gnu-smalltalk/i18n*.so
+%attr(755,root,root) %{_libdir}/gnu-smalltalk/i18n*.so
 %{_libdir}/gnu-smalltalk/i18n.la
-%attr (755,root,root) %{_libdir}/gnu-smalltalk/md5*.so
+%attr(755,root,root) %{_libdir}/gnu-smalltalk/md5*.so
 %{_libdir}/gnu-smalltalk/md5.la
-%attr (755,root,root) %{_libdir}/gnu-smalltalk/regex*.so
+%attr(755,root,root) %{_libdir}/gnu-smalltalk/regex*.so
 %{_libdir}/gnu-smalltalk/regex.la
-%attr (755,root,root) %{_libdir}/gnu-smalltalk/tcp*.so
+%attr(755,root,root) %{_libdir}/gnu-smalltalk/tcp*.so
 %{_libdir}/gnu-smalltalk/tcp.la
 %{_datadir}/gnu-smalltalk
 %{_infodir}/gst*
-%{_mandir}/man1/*
+%{_mandir}/man1/gst.1*
 %{_desktopdir}/*
 %{_pixmapsdir}/*
 
@@ -203,14 +211,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr (755,root,root) %{_bindir}/gst-config
 %attr (755,root,root) %{_bindir}/gst-package
+%attr(755,root,root) %{_libdir}/libgst.so
+%{_libdir}/libgst.la
 %{_includedir}/*.h
 %{_aclocaldir}/gst.m4
+%{_pkgconfigdir}/gnu-smalltalk.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
-# no shared lib, so it's here... to be moved to -devel if shared exists
-%{_libdir}/lib*.la
+%{_libdir}/libgst.a
 
 %files tk
 %defattr(644,root,root,755)
