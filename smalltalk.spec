@@ -2,7 +2,7 @@ Summary:	GNU smalltalk
 Summary(pl):	GNU smalltalk
 Name:		smalltalk
 Version:	2.2
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
