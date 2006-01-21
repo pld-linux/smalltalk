@@ -15,7 +15,6 @@ Patch2:		%{name}-nolibs.patch
 Patch3:		%{name}-proc.patch
 Patch4:		%{name}-amd64.patch
 Patch5:		%{name}-nostatic.patch
-Icon:		smalltalk.xpm
 URL:		http://www.gnu.org/software/smalltalk/
 BuildRequires:	atk-devel >= 1.0.0
 BuildRequires:	autoconf >= 2.52
