@@ -203,7 +203,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnu-smalltalk
 %{_infodir}/gst*
 %{_mandir}/man1/gst.1*
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
 
 %files devel
