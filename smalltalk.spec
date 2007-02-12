@@ -1,5 +1,5 @@
 Summary:	GNU smalltalk
-Summary(pl):	GNU smalltalk
+Summary(pl.UTF-8):   GNU smalltalk
 Name:		smalltalk
 Version:	2.2
 Release:	1
@@ -44,29 +44,29 @@ and David Robson. GNUSmalltalk runs on most versions of Unix or Unix
 like systems (GNU/Linux, FreeBSD, etc...). There is even a version for
 commercial operating systems like MS-NT.
 
-%description -l pl
-GNU Smalltalk jest Woln± (lub Open Source) implementacj± tak blisk±
-jÍzykowi Smalltalk-80 jak to jest opisane w ksi±øce Smalltalk-80: the
+%description -l pl.UTF-8
+GNU Smalltalk jest WolnƒÖ (lub Open Source) implementacjƒÖ tak bliskƒÖ
+jƒôzykowi Smalltalk-80 jak to jest opisane w ksiƒÖ≈ºce Smalltalk-80: the
 Language and its Implementation napisanej przez Adele Goldberg oraz
-David Robson. GNUSmalltalk dzia≥a na wiÍkszo∂ci wersji Unix'Ûw lub
-systemÛw uniksopodobnych (GNU/Linux, FreeBSD, etc...). Jest nawet
-wersja dla systemÛw komercyjnych, takich jak M$-NT.
+David Robson. GNUSmalltalk dzia≈Ça na wiƒôkszo≈õci wersji Unix'√≥w lub
+system√≥w uniksopodobnych (GNU/Linux, FreeBSD, etc...). Jest nawet
+wersja dla system√≥w komercyjnych, takich jak M$-NT.
 
 %package devel
 Summary:	GNU SmallTalk header files
-Summary(pl):	Pliki nag≥Ûwkowe dla GNU SmallTalka
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe dla GNU SmallTalka
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 The GNU SmallTalk header files.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe dla GNU SmallTalka.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe dla GNU SmallTalka.
 
 %package static
 Summary:	Static libraries for GNU Smalltalk
-Summary(pl):	Biblioteki statyczne dla GNU Smalltalka
+Summary(pl.UTF-8):   Biblioteki statyczne dla GNU Smalltalka
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 # to be moved to -devel if shared libgst exists
@@ -76,44 +76,44 @@ Requires:	readline-devel
 %description static
 The GNU SmallTalk static libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne dla GNU SmallTalka.
 
 %package tk
 Summary:	blox-tk module for GNU Smalltalk
-Summary(pl):	Modu≥ blox-tk dla GNU Smalltalka
+Summary(pl.UTF-8):   Modu≈Ç blox-tk dla GNU Smalltalka
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description tk
 blox-tk module for GNU Smalltalk.
 
-%description tk -l pl
-Modu≥ blox-tk dla GNU Smalltalka.
+%description tk -l pl.UTF-8
+Modu≈Ç blox-tk dla GNU Smalltalka.
 
 %package gdbm
 Summary:	GDBM module for GNU Smalltalk
-Summary(pl):	Modu≥ GDBM dla GNU Smalltalka
+Summary(pl.UTF-8):   Modu≈Ç GDBM dla GNU Smalltalka
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description gdbm
 GDBM module for GNU Smalltalk.
 
-%description gdbm -l pl
-Modu≥ GDBM dla GNU Smalltalka.
+%description gdbm -l pl.UTF-8
+Modu≈Ç GDBM dla GNU Smalltalka.
 
 %package gtk
 Summary:	GTK+ module for GNU Smalltalk
-Summary(pl):	Modu≥ GTK+ dla GNU Smalltalka
+Summary(pl.UTF-8):   Modu≈Ç GTK+ dla GNU Smalltalka
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description gtk
 GTK+ module for GNU Smalltalk.
 
-%description gtk -l pl
-Modu≥ GTK+ dla GNU Smalltalka.
+%description gtk -l pl.UTF-8
+Modu≈Ç GTK+ dla GNU Smalltalka.
 
 %prep
 %setup -q
