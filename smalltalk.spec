@@ -1,5 +1,5 @@
 Summary:	GNU smalltalk
-Summary(pl.UTF-8):   GNU smalltalk
+Summary(pl.UTF-8):	GNU smalltalk
 Name:		smalltalk
 Version:	2.2
 Release:	1
@@ -54,7 +54,7 @@ wersja dla systemów komercyjnych, takich jak M$-NT.
 
 %package devel
 Summary:	GNU SmallTalk header files
-Summary(pl.UTF-8):   Pliki nagłówkowe dla GNU SmallTalka
+Summary(pl.UTF-8):	Pliki nagłówkowe dla GNU SmallTalka
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -66,7 +66,7 @@ Pliki nagłówkowe dla GNU SmallTalka.
 
 %package static
 Summary:	Static libraries for GNU Smalltalk
-Summary(pl.UTF-8):   Biblioteki statyczne dla GNU Smalltalka
+Summary(pl.UTF-8):	Biblioteki statyczne dla GNU Smalltalka
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 # to be moved to -devel if shared libgst exists
@@ -81,7 +81,7 @@ Biblioteki statyczne dla GNU SmallTalka.
 
 %package tk
 Summary:	blox-tk module for GNU Smalltalk
-Summary(pl.UTF-8):   Moduł blox-tk dla GNU Smalltalka
+Summary(pl.UTF-8):	Moduł blox-tk dla GNU Smalltalka
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -93,7 +93,7 @@ Moduł blox-tk dla GNU Smalltalka.
 
 %package gdbm
 Summary:	GDBM module for GNU Smalltalk
-Summary(pl.UTF-8):   Moduł GDBM dla GNU Smalltalka
+Summary(pl.UTF-8):	Moduł GDBM dla GNU Smalltalka
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -105,7 +105,7 @@ Moduł GDBM dla GNU Smalltalka.
 
 %package gtk
 Summary:	GTK+ module for GNU Smalltalk
-Summary(pl.UTF-8):   Moduł GTK+ dla GNU Smalltalka
+Summary(pl.UTF-8):	Moduł GTK+ dla GNU Smalltalka
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
