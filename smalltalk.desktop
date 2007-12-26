@@ -1,11 +1,10 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=GNU Smalltalk
 Comment=Smalltalk interpreter
 Comment[pl]=Interpreter smalltalka
 Exec=gst -q -
 Terminal=true
 Type=Application
-Icon=smalltalk.png
+Icon=smalltalk
 Categories=GTK;Development;Building;
 # vi: encoding=utf-8
