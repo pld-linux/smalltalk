@@ -232,6 +232,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/gst-sunit.1*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
+%dir /var/lib/gnu-smalltalk
 /var/lib/gnu-smalltalk/gst.im
 
 %files devel
