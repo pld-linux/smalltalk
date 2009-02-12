@@ -1,25 +1,29 @@
 Summary:	GNU smalltalk
 Summary(pl.UTF-8):	GNU smalltalk
 Name:		smalltalk
-Version:	3.0.1
+Version:	3.1
 Release:	0.1
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
-# Source0-md5:	dbd1bc308dda3a4ef936dce2b78faa5a
+# Source0-md5:	fb4630a86fc47c893cf9eb9adccd4851
 Source1:	%{name}.desktop
 Source2:	%{name}.png
-Patch0:		%{name}-PACKAGE.patch
-Patch1:		%{name}-proc.patch
+Patch0:		%{name}-proc.patch
 URL:		http://www.gnu.org/software/smalltalk/
+BuildRequires:	OpenGL-devel
+BuildRequires:	SDL-devel
 BuildRequires:	atk-devel >= 1.0.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	gawk
 BuildRequires:	gdbm-devel
 BuildRequires:	glib2-devel >= 2.0.0
+BuildRequires:	glut-devel
 BuildRequires:	gtk+2-devel >= 1:2.0.0
+BuildRequires:	libffi-devel
 BuildRequires:	libltdl-devel
+BuildRequires:	libsigsegv
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	pango-devel >= 1:1.0.0
@@ -123,37 +127,41 @@ Sqlite3 module for GNU Smalltalk.
 %description sqlite3 -l pl.UTF-8
 Moduł Sqlite3 dla GNU Smalltalka.
 
+%package sdl
+Summary:	SDL module for GNU Smalltalk
+Summary(pl.UTF-8):	Moduł SDL dla GNU Smalltalka
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description sdl
+SDL module for GNU Smalltalk.
+
+%description sdl -l pl.UTF-8
+Moduł SDL dla GNU Smalltalka.
+
+%package opengl
+summary:	OpenGL module for GNU Smalltalk
+Summary(pl.UTF-8):	Moduł OpenGL dla GNU Smalltalka
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description opengl
+openGL module for GNU Smalltalk.
+
+%description opengl -l pl.UTF-8
+Moduł OpenGL dla GNU Smalltalka.
+
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1 
-
-rm -f config/libtool.m4
 
 %build
-cd libffi
-%{__aclocal} -I ../build-aux
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-cd ../sigsegv
-%{__aclocal} -I ../build-aux
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-cd ../snprintfv
-%{__aclocal} -I ../build-aux
-%{__autoconf}
-%{__autoheader}
-# intentionally no automake here
-cd ..
-%{__libtoolize}
-%{__aclocal} -I snprintfv -I build-aux
-%{__autoconf}
-%{__automake}
 %configure \
 	--enable-gtk=yes \
 	--enable-disassembler \
+	--enable-preemption \
+	--with-system-libffi \
+	--with-system-libsigsegv \
 	AWK=gawk
 
 # gtk things are generated improperly when some locale are set
@@ -167,13 +175,13 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/gnu-smalltalk/gst
+ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/smalltalk/gst
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 # no static modules (*.la used by ltdl)
-rm -f $RPM_BUILD_ROOT%{_libdir}/gnu-smalltalk/*.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/smalltalk/*.a
 # doesn't belong here
 rm -rf $RPM_BUILD_ROOT{%{_aclocaldir}/snprintfv.m4,%{_includedir}/snprintfv}
 
@@ -197,52 +205,41 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gst-doc
 %attr(755,root,root) %{_bindir}/gst-load
 %attr(755,root,root) %{_bindir}/gst-reload
+%attr(755,root,root) %{_bindir}/gst-remote
 %attr(755,root,root) %{_bindir}/gst-sunit
 %attr(755,root,root) %{_libdir}/libgst.so.*.*.*
-%attr(755,root,root) %{_libdir}/libsigsegv.so.*.*.*
-%dir %{_libdir}/gnu-smalltalk
-%{_libdir}/gnu-smalltalk/libc.la
-%attr(755,root,root) %{_libdir}/gnu-smalltalk/digest*.so
-%{_libdir}/gnu-smalltalk/digest.la
-%attr(755,root,root) %{_libdir}/gnu-smalltalk/i18n*.so
-%{_libdir}/gnu-smalltalk/i18n.la
-%attr(755,root,root) %{_libdir}/gnu-smalltalk/iconv*.so
-%{_libdir}/gnu-smalltalk/iconv.la
-%attr(755,root,root) %{_libdir}/gnu-smalltalk/tcp*.so
-%{_libdir}/gnu-smalltalk/tcp.la
-%attr(755,root,root) %{_libdir}/gnu-smalltalk/zlib*.so
-%{_libdir}/gnu-smalltalk/zlib.la
-%{_libdir}/gnu-smalltalk/deb
-%{_libdir}/gnu-smalltalk/lslR
-%{_libdir}/gnu-smalltalk/mailfs
-%{_libdir}/gnu-smalltalk/patchfs
-%{_libdir}/gnu-smalltalk/uar
-%{_libdir}/gnu-smalltalk/ucpio
-%{_libdir}/gnu-smalltalk/ulha
-%{_libdir}/gnu-smalltalk/urar
-%{_libdir}/gnu-smalltalk/utar
-%{_libdir}/gnu-smalltalk/uzip
-%{_libdir}/gnu-smalltalk/uzoo
-%{_datadir}/gnu-smalltalk
+%dir %{_libdir}/smalltalk
+%{_libdir}/smalltalk/libc.la
+%attr(755,root,root) %{_libdir}/smalltalk/digest*.so
+%{_libdir}/smalltalk/digest.la
+%attr(755,root,root) %{_libdir}/smalltalk/i18n*.so
+%{_libdir}/smalltalk/i18n.la
+%attr(755,root,root) %{_libdir}/smalltalk/iconv*.so
+%{_libdir}/smalltalk/iconv.la
+%attr(755,root,root) %{_libdir}/smalltalk/zlib*.so
+%{_libdir}/smalltalk/zlib.la
+%attr(755,root,root) %{_libdir}/smalltalk/sockets*.so
+%{_libdir}/smalltalk/sockets.la
+%attr(755,root,root) %{_libdir}/smalltalk/vfs/*
+%{_datadir}/smalltalk
 %{_infodir}/gst*
 %{_mandir}/man1/gst.1*
 %{_mandir}/man1/gst-convert.1*
 %{_mandir}/man1/gst-doc.1*
 %{_mandir}/man1/gst-load.1*
+%{_mandir}/man1/gst-reload.1*
 %{_mandir}/man1/gst-sunit.1*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
-%dir /var/lib/gnu-smalltalk
-/var/lib/gnu-smalltalk/gst.im
+%dir /var/lib/smalltalk
+/var/lib/smalltalk/gst.im
 
 %files devel
 %defattr(644,root,root,755)
 %attr (755,root,root) %{_bindir}/gst-config
 %attr (755,root,root) %{_bindir}/gst-package
 %attr(755,root,root) %{_libdir}/libgst.so
-%attr(755,root,root) %{_libdir}/libsigsegv.so
 %{_libdir}/libgst.la
-%{_libdir}/libsigsegv.la
 %{_includedir}/*.h
 %{_aclocaldir}/gst.m4
 %{_aclocaldir}/gst-package.m4
@@ -253,24 +250,35 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgst.a
-%{_libdir}/libsigsegv.a
 
 %files tk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/gnu-smalltalk/blox-tk*.so
-%{_libdir}/gnu-smalltalk/blox-tk.la
+%attr(755,root,root) %{_libdir}/smalltalk/blox-tk*.so
+%{_libdir}/smalltalk/blox-tk.la
 
 %files gdbm
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/gnu-smalltalk/gdbm*.so
-%{_libdir}/gnu-smalltalk/gdbm.la
+%attr(755,root,root) %{_libdir}/smalltalk/gdbm*.so
+%{_libdir}/smalltalk/gdbm.la
 
 %files gtk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/gnu-smalltalk/gst-gtk*.so
-%{_libdir}/gnu-smalltalk/gst-gtk.la
+%attr(755,root,root) %{_libdir}/smalltalk/gst-gtk*.so
+%{_libdir}/smalltalk/gst-gtk.la
 
 %files sqlite3
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/gnu-smalltalk/dbd-sqlite3*.so
-%{_libdir}/gnu-smalltalk/dbd-sqlite3.la
+%attr(755,root,root) %{_libdir}/smalltalk/dbd-sqlite3*.so
+%{_libdir}/smalltalk/dbd-sqlite3.la
+
+%files sdl
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/smalltalk/sdl*.so
+%{_libdir}/smalltalk/sdl.la
+
+%files opengl
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/smalltalk/gstglut*.so
+%{_libdir}/smalltalk/gstglut.la
+%attr(755,root,root) %{_libdir}/smalltalk/gstopengl*.so
+%{_libdir}/smalltalk/gstopengl.la
