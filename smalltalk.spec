@@ -2,7 +2,7 @@ Summary:	GNU smalltalk
 Summary(pl.UTF-8):	GNU smalltalk
 Name:		smalltalk
 Version:	3.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
@@ -12,6 +12,7 @@ Source2:	%{name}.png
 Patch0:		%{name}-proc.patch
 URL:		http://www.gnu.org/software/smalltalk/
 BuildRequires:	OpenGL-devel
+BuildRequires:	OpenGL-glut
 BuildRequires:	SDL-devel
 BuildRequires:	atk-devel >= 1.0.0
 BuildRequires:	autoconf >= 2.52
@@ -19,7 +20,6 @@ BuildRequires:	automake
 BuildRequires:	gawk
 BuildRequires:	gdbm-devel
 BuildRequires:	glib2-devel >= 2.0.0
-BuildRequires:	glut-devel
 BuildRequires:	gtk+2-devel >= 1:2.0.0
 BuildRequires:	libffi-devel
 BuildRequires:	libltdl-devel
