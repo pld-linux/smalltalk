@@ -2,7 +2,7 @@ Summary:	GNU smalltalk
 Summary(pl.UTF-8):	GNU smalltalk
 Name:		smalltalk
 Version:	3.1
-Release:	3
+Release:	4
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
@@ -220,6 +220,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/smalltalk/zlib.la
 %attr(755,root,root) %{_libdir}/smalltalk/sockets*.so
 %{_libdir}/smalltalk/sockets.la
+%dir %{_libdir}/smalltalk/vfs
 %attr(755,root,root) %{_libdir}/smalltalk/vfs/*
 %{_datadir}/smalltalk
 %{_infodir}/gst*
