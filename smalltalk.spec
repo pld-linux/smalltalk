@@ -1,3 +1,9 @@
+#
+# TODO
+#	- failure on athlon arch:
+# ./gst-tool gst-package --kernel-dir="/home/users/builder/rpm/BUILD/smalltalk-3.1/kernel" --image="/home/users/builder/rpm/BUILD/smalltalk-3.1/gst.im" --srcdir=.  --target-directory=. packages/blox/tk/package.xml
+# Illegal instruction
+#
 Summary:	GNU smalltalk
 Summary(pl.UTF-8):	GNU smalltalk
 Name:		smalltalk
