@@ -160,6 +160,7 @@ CXXFLAGS="%{rpmcxxflags} -fPIC"
 CFLAGS="%{rpmcflags} -fPIC"
 
 %configure \
+	--with-imagedir=/var/lib/smalltalk \
 	--enable-gtk=yes \
 	--enable-disassembler \
 	--enable-preemption \
