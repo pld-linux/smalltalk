@@ -164,7 +164,6 @@ CFLAGS="%{rpmcflags} -fPIC"
 	--enable-gtk=yes \
 	--enable-disassembler \
 	--enable-preemption \
-	--with-system-libffi \
 	--with-system-libsigsegv \
 	AWK=gawk
 
