@@ -165,6 +165,7 @@ CFLAGS="%{rpmcflags} -fPIC"
 	--enable-disassembler \
 	--enable-preemption \
 	--with-system-libffi \
+	--with-system-libsigsegv \
 	AWK=gawk
 
 # gtk things are generated improperly when some locale are set
