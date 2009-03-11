@@ -2,7 +2,7 @@ Summary:	GNU smalltalk
 Summary(pl.UTF-8):	GNU smalltalk
 Name:		smalltalk
 Version:	3.1
-Release:	4
+Release:	4.1
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
@@ -156,6 +156,9 @@ Moduł OpenGL dla GNU Smalltalka.
 %patch0 -p1
 
 %build
+CXXFLAGS="%{rpmcxxflags} -fPIC"
+CFLAGS="%{rpmcflags} -fPIC"
+
 %configure \
 	--enable-gtk=yes \
 	--enable-disassembler \
