@@ -18,7 +18,7 @@ Source2:	%{name}.png
 Patch0:		%{name}-proc.patch
 URL:		http://www.gnu.org/software/smalltalk/
 BuildRequires:	OpenGL-devel
-BuildRequires:	OpenGL-glut
+BuildRequires:	OpenGL-glut-devel
 BuildRequires:	SDL-devel
 BuildRequires:	atk-devel >= 1.0.0
 BuildRequires:	autoconf >= 2.52
