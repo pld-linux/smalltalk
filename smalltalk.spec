@@ -3,6 +3,7 @@
 #	- failure on athlon arch:
 # ./gst-tool gst-package --kernel-dir="/home/users/builder/rpm/BUILD/smalltalk-3.1/kernel" --image="/home/users/builder/rpm/BUILD/smalltalk-3.1/gst.im" --srcdir=.  --target-directory=. packages/blox/tk/package.xml
 # Illegal instruction
+# - package emacs stuff
 #
 Summary:	GNU smalltalk
 Summary(pl.UTF-8):	GNU smalltalk
@@ -39,7 +40,6 @@ BuildRequires:	sqlite3-devel
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	texinfo
 BuildRequires:	tk-devel >= 8.4
-#BuildRequires:	xemacs
 Requires(post,postun):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -169,6 +169,7 @@ Moduł OpenGL dla GNU Smalltalka.
 	--enable-preemption \
 	--with-system-libffi \
 	--with-system-libsigsegv \
+	--without-emacs \
 	AWK=gawk
 
 # gtk things are generated improperly when some locale are set
