@@ -146,7 +146,7 @@ SDL module for GNU Smalltalk.
 Moduł SDL dla GNU Smalltalka.
 
 %package opengl
-summary:	OpenGL module for GNU Smalltalk
+Summary:	OpenGL module for GNU Smalltalk
 Summary(pl.UTF-8):	Moduł OpenGL dla GNU Smalltalka
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
