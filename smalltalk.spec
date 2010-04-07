@@ -17,6 +17,7 @@ Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-proc.patch
+Patch1:		gmp5.patch
 URL:		http://www.gnu.org/software/smalltalk/
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-glut-devel
@@ -160,6 +161,7 @@ Moduł OpenGL dla GNU Smalltalka.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure \
