@@ -9,7 +9,7 @@ Summary:	GNU smalltalk
 Summary(pl.UTF-8):	GNU smalltalk
 Name:		smalltalk
 Version:	3.1
-Release:	4.1
+Release:	5
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
@@ -18,7 +18,7 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-proc.patch
 Patch1:		gmp5.patch
-URL:		http://www.gnu.org/software/smalltalk/
+URL:		http://smalltalk.gnu.org/
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-glut-devel
 BuildRequires:	SDL-devel
