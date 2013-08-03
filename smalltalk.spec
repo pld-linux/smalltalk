@@ -8,16 +8,15 @@
 Summary:	GNU smalltalk
 Summary(pl.UTF-8):	GNU smalltalk
 Name:		smalltalk
-Version:	3.1
-Release:	5
+Version:	3.2.5
+Release:	1
 License:	GPL
 Group:		Development/Languages
-Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.gz
-# Source0-md5:	fb4630a86fc47c893cf9eb9adccd4851
+Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.xz
+# Source0-md5:	772d2ac09f96dda203d49f0b80bc58f3
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-proc.patch
-Patch1:		gmp5.patch
 URL:		http://smalltalk.gnu.org/
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-glut-devel
@@ -25,9 +24,11 @@ BuildRequires:	SDL-devel
 BuildRequires:	atk-devel >= 1.0.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
+BuildRequires:	expat-devel
 BuildRequires:	gawk
 BuildRequires:	gdbm-devel
 BuildRequires:	glib2-devel >= 2.0.0
+BuildRequires:	gnutls-devel
 BuildRequires:	gtk+2-devel >= 1:2.0.0
 BuildRequires:	libffi-devel
 BuildRequires:	libltdl-devel
@@ -98,6 +99,18 @@ blox-tk module for GNU Smalltalk.
 %description tk -l pl.UTF-8
 Moduł blox-tk dla GNU Smalltalka.
 
+%package expat
+Summary:	Expat module for GNU Smalltalk
+Summary(pl.UTF-8):	Moduł Expat dla GNU Smalltalka
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description expat
+Expat module for GNU Smalltalk.
+
+%description expat -l pl.UTF-8
+Moduł Expat dla GNU Smalltalka.
+
 %package gdbm
 Summary:	GDBM module for GNU Smalltalk
 Summary(pl.UTF-8):	Moduł GDBM dla GNU Smalltalka
@@ -161,7 +174,6 @@ Moduł OpenGL dla GNU Smalltalka.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %configure \
@@ -176,6 +188,7 @@ Moduł OpenGL dla GNU Smalltalka.
 
 # gtk things are generated improperly when some locale are set
 %{__make} \
+	LIBTHREAD="-lpthread" \
 	LC_ALL=C
 
 %install
@@ -211,25 +224,27 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS NEWS README THANKS
 %attr(755,root,root) %{_bindir}/gst
 %attr(755,root,root) %{_bindir}/gst-blox
+%attr(755,root,root) %{_bindir}/gst-browser
 %attr(755,root,root) %{_bindir}/gst-convert
 %attr(755,root,root) %{_bindir}/gst-doc
 %attr(755,root,root) %{_bindir}/gst-load
+%attr(755,root,root) %{_bindir}/gst-profile
 %attr(755,root,root) %{_bindir}/gst-reload
 %attr(755,root,root) %{_bindir}/gst-remote
 %attr(755,root,root) %{_bindir}/gst-sunit
 %attr(755,root,root) %{_libdir}/libgst.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgst.so.7
 %dir %{_libdir}/smalltalk
 %{_libdir}/smalltalk/libc.la
 %attr(755,root,root) %{_libdir}/smalltalk/digest*.so
 %{_libdir}/smalltalk/digest.la
 %attr(755,root,root) %{_libdir}/smalltalk/i18n*.so
+%attr(755,root,root) %{_libdir}/smalltalk/gnutls-wrapper
 %{_libdir}/smalltalk/i18n.la
 %attr(755,root,root) %{_libdir}/smalltalk/iconv*.so
 %{_libdir}/smalltalk/iconv.la
 %attr(755,root,root) %{_libdir}/smalltalk/zlib*.so
 %{_libdir}/smalltalk/zlib.la
-%attr(755,root,root) %{_libdir}/smalltalk/sockets*.so
-%{_libdir}/smalltalk/sockets.la
 %dir %{_libdir}/smalltalk/vfs
 %attr(755,root,root) %{_libdir}/smalltalk/vfs/*
 %{_datadir}/smalltalk
@@ -238,6 +253,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/gst-convert.1*
 %{_mandir}/man1/gst-doc.1*
 %{_mandir}/man1/gst-load.1*
+%{_mandir}/man1/gst-profile.1*
 %{_mandir}/man1/gst-reload.1*
 %{_mandir}/man1/gst-sunit.1*
 %{_desktopdir}/*.desktop
@@ -266,6 +282,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/smalltalk/blox-tk*.so
 %{_libdir}/smalltalk/blox-tk.la
+
+%files expat
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/smalltalk/expat*.so
+%{_libdir}/smalltalk/expat.la
 
 %files gdbm
 %defattr(644,root,root,755)
