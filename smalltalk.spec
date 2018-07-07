@@ -9,7 +9,7 @@ Summary:	GNU smalltalk
 Summary(pl.UTF-8):	GNU smalltalk
 Name:		smalltalk
 Version:	3.2.5
-Release:	7
+Release:	8
 License:	GPL
 Group:		Development/Languages
 Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.xz
@@ -44,6 +44,9 @@ BuildRequires:	texinfo
 BuildRequires:	tk-devel >= 8.4
 Requires(post,postun):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# smalltalk uses -Wno-format (see GST_PROG_CC in configure.ac)
+%define		filterout_c	-Wformat -Werror=format-security
 
 %description
 GNU Smalltalk is a Free (or Open Source) implementation that closely
@@ -240,14 +243,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/smalltalk/digest*.so
 %{_libdir}/smalltalk/digest.la
 %attr(755,root,root) %{_libdir}/smalltalk/i18n*.so
-%attr(755,root,root) %{_libdir}/smalltalk/gnutls-wrapper
 %{_libdir}/smalltalk/i18n.la
 %attr(755,root,root) %{_libdir}/smalltalk/iconv*.so
 %{_libdir}/smalltalk/iconv.la
 %attr(755,root,root) %{_libdir}/smalltalk/zlib*.so
 %{_libdir}/smalltalk/zlib.la
-%dir %{_libdir}/smalltalk/vfs
-%attr(755,root,root) %{_libdir}/smalltalk/vfs/*
+%dir %{_libexecdir}/smalltalk
+%attr(755,root,root) %{_libexecdir}/smalltalk/gnutls-wrapper
+%dir %{_libexecdir}/smalltalk/vfs
+%attr(755,root,root) %{_libexecdir}/smalltalk/vfs/*
 %{_datadir}/smalltalk
 %{_infodir}/gst*
 %{_mandir}/man1/gst.1*
