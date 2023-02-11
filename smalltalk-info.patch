@@ -1,0 +1,55 @@
+Unify @direntries to PLD format
+Fix/workaround @item vs @itemx error reported by texinfo 7
+--- smalltalk-3.2.5/doc/gst.texi.orig	2013-03-23 20:56:26.000000000 +0100
++++ smalltalk-3.2.5/doc/gst.texi	2023-02-11 17:04:11.889969596 +0100
+@@ -57,9 +57,9 @@
+ @sc{gnu}
+ @end macro
+ 
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* Smalltalk: (gst).             The @gst{} user's guide.
++* Smalltalk: (gst).			The @gst{} user's guide
+ @end direntry
+ 
+ @copying
+--- smalltalk-3.2.5/doc/gst-base.texi.orig	2013-04-08 07:55:08.000000000 +0200
++++ smalltalk-3.2.5/doc/gst-base.texi	2023-02-11 17:04:59.229713135 +0100
+@@ -33,9 +33,9 @@
+ @sc{gnu}
+ @end macro
+ 
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* Smalltalk base classes: (gst-base).   The GNU Smalltalk base classes.
++* Smalltalk base classes: (gst-base).	The GNU Smalltalk base classes
+ @end direntry
+ 
+ @copying
+--- smalltalk-3.2.5/doc/gst-libs.texi.orig	2023-02-11 16:42:01.393844178 +0100
++++ smalltalk-3.2.5/doc/gst-libs.texi	2023-02-11 17:05:16.806284581 +0100
+@@ -33,9 +33,9 @@
+ @sc{gnu}
+ @end macro
+ 
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* Smalltalk libraries: (gst-libs).      The GNU Smalltalk class libraries.
++* Smalltalk libraries: (gst-libs).	The GNU Smalltalk class libraries
+ @end direntry
+ 
+ @copying
+--- smalltalk-3.2.5/doc/tutorial.texi.orig	2013-03-23 20:56:26.000000000 +0100
++++ smalltalk-3.2.5/doc/tutorial.texi	2023-02-11 17:23:57.730212016 +0100
+@@ -3920,7 +3920,7 @@ and keyword selectors:
+    #at:put:
+ @end example
+ 
+-@itemx @t{eval: ``##('' [temps] exprs ``)''}
++@item @t{eval: ``##('' [temps] exprs ``)''}
+ This syntax also has not been used in the tutorial, and results
+ in evaluating an arbitrarily complex expression at compile-time,
+ and substituting the result: for example @code{##(Object allInstances

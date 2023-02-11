@@ -1,38 +1,36 @@
-#
 # TODO
-#	- failure on athlon arch:
-# ./gst-tool gst-package --kernel-dir="/home/users/builder/rpm/BUILD/smalltalk-3.1/kernel" --image="/home/users/builder/rpm/BUILD/smalltalk-3.1/gst.im" --srcdir=.  --target-directory=. packages/blox/tk/package.xml
-# Illegal instruction
 # - package emacs stuff
 #
 Summary:	GNU smalltalk
 Summary(pl.UTF-8):	GNU smalltalk
 Name:		smalltalk
 Version:	3.2.5
-Release:	11
-License:	GPL
+Release:	12
+License:	GPL v2+
 Group:		Development/Languages
-Source0:	ftp://ftp.gnu.org/pub/gnu/smalltalk/%{name}-%{version}.tar.xz
+Source0:	https://ftp.gnu.org/gnu/smalltalk/%{name}-%{version}.tar.xz
 # Source0-md5:	772d2ac09f96dda203d49f0b80bc58f3
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-proc.patch
-URL:		http://smalltalk.gnu.org/
+Patch1:		%{name}-info.patch
+URL:		http://www.gnu.org/software/smalltalk/
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-glut-devel
-BuildRequires:	SDL-devel
+BuildRequires:	SDL-devel >= 1.2
 BuildRequires:	atk-devel >= 1.0.0
-BuildRequires:	autoconf >= 2.52
-BuildRequires:	automake
-BuildRequires:	expat-devel
+BuildRequires:	autoconf >= 2.63
+BuildRequires:	automake >= 1:1.11
+BuildRequires:	expat-devel >= 1.95
 BuildRequires:	gawk
 BuildRequires:	gdbm-devel
 BuildRequires:	glib2-devel >= 2.0.0
+BuildRequires:	gmp-devel
 BuildRequires:	gnutls-devel
 BuildRequires:	gtk+2-devel >= 1:2.0.0
 BuildRequires:	libffi-devel
 BuildRequires:	libltdl-devel
-BuildRequires:	libsigsegv
+BuildRequires:	libsigsegv-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	pango-devel >= 1:1.0.0
@@ -40,8 +38,10 @@ BuildRequires:	pkgconfig
 BuildRequires:	readline-devel >= 4.2
 BuildRequires:	sqlite3-devel
 BuildRequires:	rpmbuild(macros) >= 1.213
+BuildRequires:	tcl-devel >= 8.4
 BuildRequires:	texinfo
 BuildRequires:	tk-devel >= 8.4
+BuildRequires:	zlib-devel
 Requires(post,postun):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -70,6 +70,9 @@ Summary(pl.UTF-8):	Pliki nagłówkowe dla GNU SmallTalka
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	gmp-devel
+Requires:	libffi-devel
+Requires:	libltdl-devel
+Requires:	libsigsegv-devel
 Requires:	readline-devel
 
 %description devel
@@ -177,18 +180,19 @@ Moduł OpenGL dla GNU Smalltalka.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure \
+	AWK=gawk \
 	CPPFLAGS="-DUSE_INTERP_RESULT %{rpmcppflags}" \
-	--with-imagedir=/var/lib/smalltalk \
-	--enable-gtk=yes \
 	--enable-disassembler \
+	--enable-gtk \
 	--enable-preemption \
+	--with-imagedir=/var/lib/smalltalk \
 	--with-system-libffi \
 	--with-system-libsigsegv \
-	--without-emacs \
-	AWK=gawk
+	--without-emacs
 
 # gtk things are generated improperly when some locale are set
 %{__make} \
@@ -204,13 +208,11 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 ln -sf ../../bin/gst $RPM_BUILD_ROOT%{_datadir}/smalltalk/gst
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 # no static modules (*.la used by ltdl)
-rm -f $RPM_BUILD_ROOT%{_libdir}/smalltalk/*.a
-# doesn't belong here
-rm -rf $RPM_BUILD_ROOT{%{_aclocaldir}/snprintfv.m4,%{_includedir}/snprintfv}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/smalltalk/*.a
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -248,12 +250,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/smalltalk/iconv.la
 %attr(755,root,root) %{_libdir}/smalltalk/zlib*.so
 %{_libdir}/smalltalk/zlib.la
+%if "%{_libexecdir}" != "%{_libdir}"
 %dir %{_libexecdir}/smalltalk
+%endif
 %attr(755,root,root) %{_libexecdir}/smalltalk/gnutls-wrapper
 %dir %{_libexecdir}/smalltalk/vfs
 %attr(755,root,root) %{_libexecdir}/smalltalk/vfs/*
 %{_datadir}/smalltalk
-%{_infodir}/gst*
+%{_desktopdir}/smalltalk.desktop
+%{_pixmapsdir}/smalltalk.png
+%{_infodir}/gst.info*
+%{_infodir}/gst-base.info*
+%{_infodir}/gst-libs.info*
 %{_mandir}/man1/gst.1*
 %{_mandir}/man1/gst-convert.1*
 %{_mandir}/man1/gst-doc.1*
@@ -261,8 +269,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/gst-profile.1*
 %{_mandir}/man1/gst-reload.1*
 %{_mandir}/man1/gst-sunit.1*
-%{_desktopdir}/*.desktop
-%{_pixmapsdir}/*
 %dir /var/lib/smalltalk
 /var/lib/smalltalk/gst.im
 
@@ -272,7 +278,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr (755,root,root) %{_bindir}/gst-package
 %attr(755,root,root) %{_libdir}/libgst.so
 %{_libdir}/libgst.la
-%{_includedir}/*.h
+%{_includedir}/gst.h
+%{_includedir}/gstpub.h
 %{_aclocaldir}/gst.m4
 %{_aclocaldir}/gst-package.m4
 %{_pkgconfigdir}/gnu-smalltalk.pc
