@@ -1,0 +1,18 @@
+--- smalltalk-3.2.5/libgst/dict.inl.orig	2013-04-07 21:24:12.000000000 +0200
++++ smalltalk-3.2.5/libgst/dict.inl	2023-02-11 19:13:44.149203321 +0100
+@@ -578,15 +578,9 @@ floatq_new (long double f)
+   OOP floatOOP;
+   gst_object obj = new_instance_with (_gst_floatq_class, 16, &floatOOP);
+ 
+-#if defined __i386__ || defined __x86_64__
+-  /* Two bytes (six on x86-64) of 80-bit long doubles are unused.  */
+-  memcpy (&obj->data, &f, 10);
+-  memset (((char *)obj->data) + 10, 0, 6);
+-#else
+   memcpy (&obj->data, &f, sizeof (long double));
+   memset (((char *)obj->data) + sizeof (long double), 0,
+ 	  16 - sizeof (long double));
+-#endif
+ 
+   MAKE_OOP_READONLY (floatOOP, true);
+   return (floatOOP);

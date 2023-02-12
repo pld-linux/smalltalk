@@ -1,0 +1,25 @@
+Fix assembler operations (x32 uses 32-bit OPP)
+Fix uninitialized variables in _gst_mpz_from_oop
+Still not sufficient - probably more work needed for size of limb != size of pointer
+--- smalltalk-3.2.5/libgst/interp.inl.orig	2013-04-07 21:24:12.000000000 +0200
++++ smalltalk-3.2.5/libgst/interp.inl	2023-02-11 18:16:19.552251830 +0100
+@@ -76,7 +76,7 @@ static inline OOP tagged_xor (OOP op1, O
+ } while(0)
+ 
+ 
+-#if defined __i386__
++#if defined __i386__ || defined __ILP32__
+ #define OP_SUFFIX "l"
+ #define OP_CONSTRAINT "rmi"
+ #else
+--- libgst/mpz.c.orig	2013-03-23 20:56:26.000000000 +0100
++++ libgst/mpz.c	2023-02-11 21:25:51.542429365 +0100
+@@ -1670,6 +1670,8 @@ _gst_mpz_from_oop(gst_mpz *mpz, OOP srcO
+       /* We have half a limb in the LargeInteger, so we cannot work
+ 	 directly in the object data.  */
+ 
++      gst_mpz_realloc(mpz, n);
++      dest = mpz->d;
+       mpz->size = n;
+       while (n--)
+ 	*dest++ = ~*src++;

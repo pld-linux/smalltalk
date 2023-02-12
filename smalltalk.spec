@@ -14,6 +14,8 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-proc.patch
 Patch1:		%{name}-info.patch
+Patch2:		%{name}-x32.patch
+Patch3:		%{name}-longdouble.patch
 URL:		http://www.gnu.org/software/smalltalk/
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-glut-devel
@@ -43,6 +45,8 @@ BuildRequires:	texinfo
 BuildRequires:	tk-devel >= 8.4
 BuildRequires:	zlib-devel
 Requires(post,postun):	/sbin/ldconfig
+# as of 3.2.5 fails probably because of issues with size of limb != size of pointer
+ExcludeArch:	x32
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # smalltalk uses -Wno-format (see GST_PROG_CC in configure.ac)
@@ -181,6 +185,8 @@ Moduł OpenGL dla GNU Smalltalka.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 %configure \
