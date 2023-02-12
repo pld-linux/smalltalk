@@ -12,8 +12,8 @@ Still not sufficient - probably more work needed for size of limb != size of poi
  #define OP_SUFFIX "l"
  #define OP_CONSTRAINT "rmi"
  #else
---- libgst/mpz.c.orig	2013-03-23 20:56:26.000000000 +0100
-+++ libgst/mpz.c	2023-02-11 21:25:51.542429365 +0100
+--- smalltalk-3.2.5/libgst/mpz.c.orig	2013-03-23 20:56:26.000000000 +0100
++++ smalltalk-3.2.5/libgst/mpz.c	2023-02-11 21:25:51.542429365 +0100
 @@ -1670,6 +1670,8 @@ _gst_mpz_from_oop(gst_mpz *mpz, OOP srcO
        /* We have half a limb in the LargeInteger, so we cannot work
  	 directly in the object data.  */
